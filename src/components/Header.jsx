@@ -55,9 +55,19 @@ export default function Header() {
               {suggestions.map((recipe) => (
                 <li
                   key={recipe.id}
-                  className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                  className="hover:bg-gray-200 cursor-pointer"
+                  // Clear suggestions when a recipe is selected
+                  onClick={() => {
+                    setQuery("");
+                    setSuggestions([]);
+                  }}
                 >
-                  <Link href={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+                  <Link
+                    href={`/recipes/${recipe.id}`}
+                    className="block px-3 py-2 w-full h-full"
+                  >
+                    {recipe.name}
+                  </Link>
                 </li>
               ))}
             </ul>
