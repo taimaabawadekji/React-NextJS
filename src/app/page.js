@@ -50,8 +50,8 @@ export default async function Home() {
   const mealTypes = Array.from(
     new Set(
       data.recipes
-        .flatMap((r) => (Array.isArray(r.mealType) ? r.mealType : [r.mealType]))
-        .filter(Boolean), // remove null/undefined
+        .flatMap((r) => (Array.isArray(r.mealType) ? r.mealType : [r.mealType])) //some reciepes have mealType an array so we don't get duplicated mealTypes
+        .filter(Boolean), // remove null or undefined
     ),
   );
   {
@@ -74,7 +74,7 @@ export default async function Home() {
 
           {/*See See All Recipes Button*/}
           <div className="mt-10 text-center">
-            <a
+            <Link
               href="/recipes"
               className="inline-block bg-gradient-to-r from-orange-400 to-amber-400
                          text-white px-8 py-3 rounded-full text-lg font-medium
@@ -82,7 +82,7 @@ export default async function Home() {
                          shadow-md transition"
             >
               See All Recipes
-            </a>
+            </Link>
           </div>
         </div>
       </section>

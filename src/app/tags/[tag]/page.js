@@ -12,7 +12,9 @@ export default async function TagPage({ params }) {
 
   return (
     <main className="p-6">
-      <h1 className="text-3xl font-bold mb-6">{tag}</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center text-orange-600">
+        {tag}
+      </h1>
       <RecipeList recipes={data.recipes} />
     </main>
   );

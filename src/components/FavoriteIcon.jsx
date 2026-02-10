@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 function FavoriteIconComponent({ favId }) {
+  //favId is the ID for the recipe
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Initialize from localStorage
+  //Read from localStorage and return empty if there's nothing = null
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("favorites") || "[]");
     setIsFavorite(stored.includes(favId));
@@ -59,6 +61,7 @@ function FavoriteIconComponent({ favId }) {
   );
 }
 
+//forces the component to render only on the client because localStorage is browser only
 const FavoriteIcon = dynamic(() => Promise.resolve(FavoriteIconComponent), {
   ssr: false,
 });

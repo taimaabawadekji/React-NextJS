@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Header() {
-  const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [query, setQuery] = useState(""); //to know what's typed into the search box
+  const [suggestions, setSuggestions] = useState([]); //recipe results
 
   // Fetch suggestions as the user types
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Header() {
           `https://dummyjson.com/recipes/search?q=${encodeURIComponent(query)}`,
         );
         const data = await res.json();
-        setSuggestions(data.recipes || []);
+        setSuggestions(data.recipes || []); //store in suggestions the recipes
       } catch (err) {
         console.error(err);
       }
@@ -33,20 +33,20 @@ export default function Header() {
   return (
     <header className="bg-gradient-to-r from-orange-400 to-amber-400 text-white shadow-lg">
       <div className="max-w-5xl mx-auto flex justify-between items-center py-4 px-6 h-21">
-        {/* Logo & Title */}
+        {/* Logo */}
         <div className="flex items-center gap-4">
           <div className="relative h-20 w-[28.5rem] sm:w-[20rem] md:w-[16rem] lg:w-[10rem]">
             <Image src="/images/Logo2.png" alt="Recipe App" fill priority />
           </div>
         </div>
         {/* Search bar */}
-        <div className="relative ml-4">
+        <div className="relative mr-4">
           <input
             className="px-3 py-1 ml-100 rounded-lg text-black w-64 placeholder-white"
             type="text"
             placeholder="Search recipes..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)} //when I type, it's triggering setQuery which triggers the effect, which triggers the API
           />
 
           {/* Suggestions dropdown */}
@@ -62,6 +62,7 @@ export default function Header() {
                     setSuggestions([]);
                   }}
                 >
+                  {/* display recipes name on suggestions dropdown */}
                   <Link
                     href={`/recipes/${recipe.id}`}
                     className="block px-3 py-2 w-full h-full"

@@ -35,6 +35,7 @@ export default function RecipeCard({ recipe }) {
               className="w-auto h-auto object-cover rounded-md"
             />
           </div>
+          {/* recipe info */}
           <h2 className="text-center font-semibold mt-3">{recipe.name}</h2>
           <p className="text-center text-sm text-gray-500">
             {recipe.difficulty} - {recipe.prepTimeMinutes} Minutes

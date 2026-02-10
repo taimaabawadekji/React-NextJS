@@ -2,17 +2,18 @@ import RecipeList from "@/components/RecipeList";
 import { notFound } from "next/navigation";
 
 export default async function MealTypePage({ params }) {
-  const resolvedParams = await params;
-  const type = resolvedParams.type;
-
+  // const { type } = params; NOT WORKING params.value === "{\"type\":\"Appetizer\"}" 404 NOT FOUND
+  const resolvedParams = await Promise.resolve(params); //{ type: "Appetizer" }
+  const type = resolvedParams?.type;
   if (!type) {
     notFound();
   }
 
   const decodedType = decodeURIComponent(type);
+  console.log(decodedType);
 
   const res = await fetch(
-    `https://dummyjson.com/recipes/meal-type/${decodedType}`,
+    `https://dummyjson.com/recipes/meal-type/${decodedType}`, //meal-type/Dinner
     { cache: "no-store" },
   );
 
